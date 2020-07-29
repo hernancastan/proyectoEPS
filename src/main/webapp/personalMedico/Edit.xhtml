@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonalMedicoEditDlg" widgetVar="PersonalMedicoEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonalMedicoTitle}">
+            <h:form id="PersonalMedicoEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personalMedicoController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_idPersonalmedico}" for="idPersonalmedico" />
+                        <p:inputText id="idPersonalmedico" value="#{personalMedicoController.selected.idPersonalmedico}" title="#{bundle.EditPersonalMedicoTitle_idPersonalmedico}" required="true" requiredMessage="#{bundle.EditPersonalMedicoRequiredMessage_idPersonalmedico}"/>
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_tipoIde}" for="tipoIde" />
+                        <p:inputText id="tipoIde" value="#{personalMedicoController.selected.tipoIde}" title="#{bundle.EditPersonalMedicoTitle_tipoIde}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_numIde}" for="numIde" />
+                        <p:inputText id="numIde" value="#{personalMedicoController.selected.numIde}" title="#{bundle.EditPersonalMedicoTitle_numIde}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_nombrePm}" for="nombrePm" />
+                        <p:inputText id="nombrePm" value="#{personalMedicoController.selected.nombrePm}" title="#{bundle.EditPersonalMedicoTitle_nombrePm}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_apellidoPm}" for="apellidoPm" />
+                        <p:inputText id="apellidoPm" value="#{personalMedicoController.selected.apellidoPm}" title="#{bundle.EditPersonalMedicoTitle_apellidoPm}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_direccionPm}" for="direccionPm" />
+                        <p:inputText id="direccionPm" value="#{personalMedicoController.selected.direccionPm}" title="#{bundle.EditPersonalMedicoTitle_direccionPm}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_telefonoPm}" for="telefonoPm" />
+                        <p:inputText id="telefonoPm" value="#{personalMedicoController.selected.telefonoPm}" title="#{bundle.EditPersonalMedicoTitle_telefonoPm}" />
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{personalMedicoController.selected.idUsuario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuariosController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_idEstado}" for="idEstado" />
+                        <p:selectOneMenu id="idEstado" value="#{personalMedicoController.selected.idEstado}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoController.itemsAvailableSelectOne}"
+                                           var="idEstadoItem"
+                                           itemValue="#{idEstadoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPersonalMedicoLabel_idEspecialidad}" for="idEspecialidad" />
+                        <p:selectOneMenu id="idEspecialidad" value="#{personalMedicoController.selected.idEspecialidad}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{especialidadController.itemsAvailableSelectOne}"
+                                           var="idEspecialidadItem"
+                                           itemValue="#{idEspecialidadItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personalMedicoController.update}" value="#{bundle.Save}" update="display,:PersonalMedicoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonalMedicoEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonalMedicoEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
